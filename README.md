@@ -4,7 +4,7 @@ Watch videos on **YouTube, Udemy, Coursera, movie streaming sites and any page w
 **bilingual subtitles**, **phonetic transcription**, **tap-to-look-up dictionary** and **real-time AI voice dubbing**.
 No video download, no waiting for processing, no account required.
 
-> 🇻🇳 Tài liệu tiếng Việt: [`README.vi.md`](README.vi.md) · Product overview: [`PRODUCT.md`](PRODUCT.md) · Roadmap & technical decisions: [`PLAN.md`](PLAN.md) (both in Vietnamese)
+> Product overview: [`PRODUCT.md`](PRODUCT.md) · Roadmap & technical decisions: [`PLAN.md`](PLAN.md) · 🇻🇳 Tiếng Việt: [`README.vi.md`](README.vi.md)
 
 ## Quick start (5 minutes)
 1. Install the extension (see **Installation** below) and open a YouTube / Udemy / Coursera video.
@@ -125,7 +125,7 @@ all offline voices); `python3 tools/build-store.py` builds the **store edition**
   ships with `LICENSE` (GPL-3.0) + `NOTICE.txt`.
 - Store configuration (store ID, product/variant IDs, checkout links, support email, prices): `store/config.json`.
 - Store submission kit: `store/listing.md`, `store/review-notes.md`, `store/privacy.html`, images in `store/assets/`;
-  release steps: `store/HUONG-DAN-PHAT-HANH.md` (Vietnamese).
+  release steps: `store/RELEASE-GUIDE.md`.
 
 ## Data sources & third-party licenses
 - **YouTube**: `content/page-bridge.js` (MAIN world) only *observes* the `/api/timedtext` responses the player downloads and calls the player's own API to enable a track.
