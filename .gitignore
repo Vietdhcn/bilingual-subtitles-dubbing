@@ -1,0 +1,12 @@
+# bản build (tools/build-store.py tạo lại được)
+dist/
+# profile trình duyệt dùng để test
+.chrome-*/
+.edge-*/
+# ảnh chụp / file tạm khi test
+tools/*.jpg
+*.bak
+*.tmp
+*.log
+Thumbs.db
+.DS_Store

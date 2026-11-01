@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light dark">
+<title>Song ngữ & Thuyết minh</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="mark" aria-hidden="true"><i></i><i></i></span>
+    <div>
+      <h1>Song ngữ &amp; Thuyết minh</h1>
+      <p id="status" class="status" role="status">Đang kiểm tra trang…</p>
+    </div>
+  </div>
+  <button id="openOptions" class="icon-btn" title="Cài đặt nâng cao" aria-label="Cài đặt nâng cao">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm8.6-2.3.1-1.2-.1-1.2 2-1.6-2-3.4-2.4 1a8 8 0 0 0-2-1.2L15.8 3h-4l-.4 2.6a8 8 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6-.1 1.2.1 1.2-2 1.6 2 3.4 2.4-1c.6.5 1.3.9 2 1.2l.4 2.6h4l.4-2.6a8 8 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6Z"/></svg>
+  </button>
+</header>
+
+<section class="screen" aria-label="Xem trước phụ đề">
+  <div id="preview" class="preview">
+    <span class="pv-line pv-ph" id="pvPh">ˈɛvri ɡreɪt ˈprɑːdʌkt stɑːrts wɪð ə ˈsɪŋɡəl aɪˈdiə</span>
+    <span class="pv-line pv-orig" id="pvOrig">Every great product starts with a single idea.</span>
+    <span class="pv-line pv-tr" id="pvTr">Mọi sản phẩm tuyệt vời đều bắt đầu từ một ý tưởng.</span>
+  </div>
+  <span id="onair" class="onair" aria-hidden="true">Thuyết minh</span>
+</section>
+
+<section class="switches">
+  <label class="big-switch">
+    <input type="checkbox" id="enabled">
+    <span class="bs-body"><b>Phụ đề</b><small id="enabledHint">Song ngữ</small></span>
+    <span class="knob" aria-hidden="true"></span>
+  </label>
+  <label class="big-switch dub">
+    <input type="checkbox" id="dubEnabled">
+    <span class="bs-body"><b>Thuyết minh</b><small id="voiceNow">Giọng tự động</small></span>
+    <span class="knob" aria-hidden="true"></span>
+  </label>
+  <p class="tab-note" id="tabNote"><span id="tabNoteText">Mặc định tắt — bật riêng tab này</span><button id="planChip" class="plan-chip" type="button" hidden></button></p>
+</section>
+
+<nav class="tabs" role="tablist" aria-label="Nhóm cài đặt">
+  <button role="tab" id="tab-sub" aria-controls="pane-sub" aria-selected="true" tabindex="0" data-tab="sub">Phụ đề</button>
+  <button role="tab" id="tab-voice" aria-controls="pane-voice" aria-selected="false" tabindex="-1" data-tab="voice">Giọng đọc</button>
+  <button role="tab" id="tab-sound" aria-controls="pane-sound" aria-selected="false" tabindex="-1" data-tab="sound">Âm thanh</button>
+</nav>
+
+<main>
+  <!-- PHỤ ĐỀ -->
+  <section class="pane" data-pane="sub" id="pane-sub" role="tabpanel" aria-labelledby="tab-sub">
+    <div id="localPack" class="pack" hidden>
+      <div><b>Dịch trên máy</b><small id="localPackText">Tải gói dịch một lần, sau đó dịch offline, không giới hạn.</small></div>
+      <button id="localPackBtn" class="primary-sm">Tải gói</button>
+    </div>
+    <div class="row">
+      <label for="targetLang">Dịch sang</label>
+      <select id="targetLang"></select>
+    </div>
+    <div class="row">
+      <span class="lbl">Hiển thị</span>
+      <div class="chips" role="group" aria-label="Các dòng phụ đề">
+        <button data-flag="showPhonetic" aria-pressed="false">Phiên âm</button><button data-flag="showOriginal" aria-pressed="true">Gốc</button><button data-flag="showTranslation" aria-pressed="true">Dịch</button>
+      </div>
+    </div>
+    <div class="row slider" data-when="showPhonetic">
+      <label for="fontSizePhonetic">Cỡ chữ phiên âm</label>
+      <input type="range" id="fontSizePhonetic" min="10" max="36" step="1"><output data-for="fontSizePhonetic"></output>
+    </div>
+    <div class="row" data-when="showPhonetic">
+      <span class="lbl">Phiên âm tiếng Anh</span>
+      <div class="seg" data-setting="phoneticAccent"><button data-v="us">Anh-Mỹ</button><button data-v="uk">Anh-Anh</button></div>
+    </div>
+    <div class="row">
+      <span class="lbl">Chỉnh kiểu chữ</span>
+      <div class="seg" id="styleLine" role="tablist" aria-label="Chỉnh kiểu chữ cho dòng nào">
+        <button data-line="tr" role="tab" id="line-tr" aria-controls="group-tr" aria-selected="true" tabindex="0" class="on">Dòng dịch</button><button data-line="or" role="tab" id="line-or" aria-controls="group-or" aria-selected="false" tabindex="-1">Dòng gốc</button>
+      </div>
+    </div>
+    <div class="style-group" data-line-group="tr" id="group-tr" role="tabpanel" aria-labelledby="line-tr">
+      <div class="row slider">
+        <label for="fontSizeTranslated">Cỡ chữ</label>
+        <input type="range" id="fontSizeTranslated" min="12" max="48" step="1"><output data-for="fontSizeTranslated"></output>
+      </div>
+      <div class="row">
+        <span class="lbl">Màu</span>
+        <div class="swatches" data-setting="subColor">
+          <button data-v="#FFD23F" style="--c:#FFD23F" aria-label="Vàng"></button>
+          <button data-v="#FFFFFF" style="--c:#FFFFFF" aria-label="Trắng"></button>
+          <button data-v="#7FE7FF" style="--c:#7FE7FF" aria-label="Xanh nhạt"></button>
+          <button data-v="#9DF2A8" style="--c:#9DF2A8" aria-label="Xanh lá"></button>
+          <button data-v="#FFB3C7" style="--c:#FFB3C7" aria-label="Hồng"></button>
+          <label class="sw-custom" title="Màu khác…"><input type="color" data-color-for="subColor" aria-label="Chọn màu khác cho dòng dịch"></label>
+        </div>
+      </div>
+      <div class="row">
+        <span class="lbl">Nền chữ</span>
+        <div class="seg" data-setting="subBg">
+          <button data-v="none">Viền</button><button data-v="soft">Mờ</button><button data-v="solid">Đậm</button>
+        </div>
+      </div>
+      <div class="row">
+        <label for="subFont">Phông chữ</label>
+        <select id="subFont">
+          <option value="system">Segoe UI</option><option value="serif">Có chân</option>
+          <option value="rounded">Bo tròn</option><option value="condensed">Hẹp</option>
+        </select>
+      </div>
+    </div>
+    <div class="style-group" data-line-group="or" id="group-or" role="tabpanel" aria-labelledby="line-or" hidden>
+      <div class="row slider">
+        <label for="fontSizeOriginal">Cỡ chữ</label>
+        <input type="range" id="fontSizeOriginal" min="10" max="40" step="1"><output data-for="fontSizeOriginal"></output>
+      </div>
+      <div class="row">
+        <span class="lbl">Màu</span>
+        <div class="swatches" data-setting="subOrigColor">
+          <button data-v="#E6E9EF" style="--c:#E6E9EF" aria-label="Trắng ngà"></button>
+          <button data-v="#AEB6C2" style="--c:#AEB6C2" aria-label="Xám"></button>
+          <button data-v="#FFD23F" style="--c:#FFD23F" aria-label="Vàng"></button>
+          <button data-v="#7FE7FF" style="--c:#7FE7FF" aria-label="Xanh nhạt"></button>
+          <button data-v="#9DF2A8" style="--c:#9DF2A8" aria-label="Xanh lá"></button>
+          <label class="sw-custom" title="Màu khác…"><input type="color" data-color-for="subOrigColor" aria-label="Chọn màu khác cho dòng gốc"></label>
+        </div>
+      </div>
+      <div class="row">
+        <span class="lbl">Nền chữ</span>
+        <div class="seg" data-setting="subOrigBg">
+          <button data-v="none">Viền</button><button data-v="soft">Mờ</button><button data-v="solid">Đậm</button>
+        </div>
+      </div>
+      <div class="row">
+        <label for="subOrigFont">Phông chữ</label>
+        <select id="subOrigFont">
+          <option value="system">Segoe UI</option><option value="serif">Có chân</option>
+          <option value="rounded">Bo tròn</option><option value="condensed">Hẹp</option>
+        </select>
+      </div>
+    </div>
+    <div class="row slider">
+      <label for="subBottom">Độ cao phụ đề</label>
+      <input type="range" id="subBottom" min="2" max="40" step="1"><output data-for="subBottom"></output>
+    </div>
+    <label class="row check">
+      <span>Bấm vào chữ để tra phiên âm, phát âm, nghĩa</span>
+      <input type="checkbox" id="wordLookup" class="mini-switch">
+    </label>
+    <label class="row check" data-when="wordLookup">
+      <span>Tạm dừng video khi đang tra từ</span>
+      <input type="checkbox" id="lookupPause" class="mini-switch">
+    </label>
+    <label class="row check">
+      <span>Ẩn phụ đề có sẵn của trang</span>
+      <input type="checkbox" id="hideNativeCaptions" class="mini-switch">
+    </label>
+    <label class="row check" title="Ví dụ video có sẵn phụ đề tiếng Việt do người dịch: dùng bản đó thay cho dịch máy (chính xác, tự nhiên hơn)">
+      <span>Ưu tiên bản dịch có sẵn của video</span>
+      <input type="checkbox" id="preferHumanTranslation" class="mini-switch">
+    </label>
+  </section>
+
+  <!-- GIỌNG ĐỌC -->
+  <section class="pane" data-pane="voice" id="pane-voice" role="tabpanel" aria-labelledby="tab-voice" hidden>
+    <div class="row">
+      <span class="lbl">Ưu tiên</span>
+      <div class="seg" data-setting="dubGender">
+        <button data-v="any">Bất kỳ</button><button data-v="female">Nữ</button><button data-v="male">Nam</button>
+      </div>
+    </div>
+    <ul id="voiceList" class="voices" role="radiogroup" aria-label="Chọn giọng"></ul>
+    <p id="voiceNote" class="note"></p>
+    <div class="row slider">
+      <label for="dubRate">Tốc độ</label>
+      <input type="range" id="dubRate" min="0.7" max="1.5" step="0.05"><output data-for="dubRate"></output>
+    </div>
+    <div class="row slider">
+      <label for="dubPitch">Cao độ</label>
+      <input type="range" id="dubPitch" min="0.8" max="1.25" step="0.01"><output data-for="dubPitch"></output>
+    </div>
+  </section>
+
+  <!-- ÂM THANH -->
+  <section class="pane" data-pane="sound" id="pane-sound" role="tabpanel" aria-labelledby="tab-sound" hidden>
+    <p class="note">Các mức dưới đây tính theo âm lượng bạn đang đặt trên trình phát video.</p>
+    <div class="row slider">
+      <label for="dubVolume">Giọng thuyết minh</label>
+      <input type="range" id="dubVolume" min="0" max="1" step="0.05"><output data-for="dubVolume"></output>
+    </div>
+    <div class="row slider">
+      <label for="originalVolume">Tiếng gốc</label>
+      <input type="range" id="originalVolume" min="0" max="1" step="0.05"><output data-for="originalVolume"></output>
+    </div>
+    <div class="row slider">
+      <label for="duckVolume">Tiếng gốc lúc đang đọc</label>
+      <input type="range" id="duckVolume" min="0" max="1" step="0.05"><output data-for="duckVolume"></output>
+    </div>
+    <label class="row check">
+      <span>Tắt hẳn tiếng gốc khi thuyết minh</span>
+      <input type="checkbox" id="muteOriginal" class="mini-switch">
+    </label>
+  </section>
+</main>
+
+<footer class="foot">
+  <label id="siteRow" class="site" hidden>
+    <input type="checkbox" id="siteOn" class="mini-switch">
+    <span class="site-host" id="siteHost"></span>
+  </label>
+  <span class="foot-acts">
+    <button id="openPanel" class="ghost" disabled title="Danh sách câu: bấm để tua, tìm kiếm (phím A/S/D/Q khi xem)">Bảng câu</button>
+    <button id="exportSrt" class="ghost" disabled title="Tải phụ đề song ngữ .srt">Tải .srt</button>
+  </span>
+</footer>
+
+<script src="../edition.js"></script>
+<script src="../content/settings.js"></script>
+<script src="../content/voices.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>

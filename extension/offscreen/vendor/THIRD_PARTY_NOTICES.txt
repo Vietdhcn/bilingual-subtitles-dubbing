@@ -1,0 +1,19 @@
+Thư viện bên thứ ba được đóng gói trong thư mục này:
+
+- onnxruntime-web 1.20.1 (ort.wasm.min.mjs, ort-wasm-simd-threaded.*) — MIT License, © Microsoft Corporation.
+  https://github.com/microsoft/onnxruntime
+- @diffusionstudio/piper-wasm 1.0.0 (piper_phonemize.*) — gói phát hành theo MIT; bản build chứa
+  piper-phonemize (MIT, © Michael Hansen) và espeak-ng (GPL-3.0-or-later) cùng dữ liệu espeak-ng-data.
+  https://github.com/rhasspy/piper-phonemize  https://github.com/espeak-ng/espeak-ng
+  → Nếu phát hành extension công khai kèm các file này, phải tuân thủ điều khoản GPL-3.0 của espeak-ng
+    (công bố mã nguồn của phần được phân phối kèm).
+
+Model giọng Piper KHÔNG đóng gói sẵn; extension tải từ https://huggingface.co/rhasspy/piper-voices khi người dùng chọn,
+mỗi model có giấy phép riêng (xem MODEL_CARD trong kho đó), ví dụ:
+- vi_VN-vais1000-medium: dữ liệu VAIS-1000, CC BY 4.0.
+- vi_VN-vivos-x_low: dữ liệu VIVOS/InfoRe, CC BY-NC-SA 4.0 (chỉ dùng phi thương mại).
+
+Model giọng KHÔNG đóng gói trong tiện ích (người dùng tự tải khi chọn giọng):
+- Piper voices (rhasspy/piper-voices) — mỗi model một giấy phép, vd. vi_VN-vais1000: CC BY 4.0.
+- MMS-TTS tiếng Việt (facebook/mms-tts-vie, bản ONNX Xenova/mms-tts-vie) — CC BY-NC 4.0: chỉ dùng cá nhân, phi thương mại.
+Dịch vụ tra từ: Free Dictionary API (dictionaryapi.dev, dữ liệu Wiktionary — CC BY-SA 3.0).

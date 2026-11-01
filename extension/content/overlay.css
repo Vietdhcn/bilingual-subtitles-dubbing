@@ -1,0 +1,209 @@
+/* Phụ đề song ngữ trên video. Các biến --ysn-* do overlay.js đặt theo cài đặt người dùng. */
+#ysn-overlay {
+  --ysn-tr: #FFD23F; --ysn-or: #E6E9EF; --ysn-bottom: 9%;
+  --ysn-font: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  position: absolute; left: 0; right: 0; bottom: var(--ysn-bottom);
+  display: flex; flex-direction: column; align-items: center; gap: .18em;
+  pointer-events: none; z-index: 60; padding: 0 6%;
+  font-family: var(--ysn-font); text-align: center; line-height: 1.3;
+  transition: bottom .2s ease;
+}
+.ytp-autohide #ysn-overlay { bottom: max(calc(var(--ysn-bottom) - 6%), 2%); }
+#ysn-overlay:empty { display: none; }
+#ysn-overlay .ysn-line {
+  display: inline-block; max-width: 100%; padding: .12em .5em; border-radius: .3em;
+  white-space: pre-wrap; word-break: break-word;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+#ysn-overlay .ysn-original { color: var(--ysn-or); font-weight: 450; font-family: var(--ysn-font-or, var(--ysn-font)); }
+#ysn-overlay .ysn-translated { color: var(--ysn-tr); font-weight: 650; }
+#ysn-overlay .ysn-phonetic { color: var(--ysn-ph, #A8D8FF); font-weight: 400; letter-spacing: .01em; font-family: var(--ysn-font-or, var(--ysn-font)); }
+
+/* Tra từ: chữ bấm được */
+#ysn-overlay.ysn-interactive .ysn-line:not(.ysn-phonetic):not(.ysn-status) { pointer-events: auto; cursor: default; }
+#ysn-overlay .ysn-w { border-radius: .2em; transition: background-color .12s ease; }
+#ysn-overlay.ysn-interactive .ysn-w { cursor: pointer; }
+#ysn-overlay.ysn-interactive .ysn-w:hover { background: rgba(255, 255, 255, .2); }
+#ysn-overlay .ysn-w.ysn-w-active { background: rgba(255, 210, 63, .35); }
+
+/* kiểu nền — đặt riêng cho từng dòng (data-bg trên .ysn-line): dòng gốc và dòng dịch có thể khác nhau */
+#ysn-overlay .ysn-line[data-bg="soft"]  { background: rgba(8, 11, 18, .62); text-shadow: 0 1px 2px rgba(0,0,0,.55); }
+#ysn-overlay .ysn-line[data-bg="solid"] { background: rgba(8, 11, 18, .9); }
+#ysn-overlay .ysn-line[data-bg="none"]  {
+  background: none;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 2px 4px rgba(0,0,0,.8);
+}
+#ysn-overlay .ysn-status { color: #CFE0FF; font-size: 13px; background: rgba(8, 11, 18, .7); }
+
+/* Thanh công cụ góc trên-phải của video. Bình thường chỉ hiện đèn "Thuyết minh" (khi đang bật);
+   rê chuột trên video → hiện thêm các nút. */
+#ysn-dub-badge.ysn-bar {
+  position: absolute; top: 12px; right: 12px; z-index: 61;
+  display: flex; align-items: center; gap: 4px; pointer-events: auto;
+  font: 600 12px/1 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+}
+#ysn-dub-badge .ysn-b {
+  all: unset; box-sizing: border-box; display: none; place-items: center; height: 30px; min-width: 30px; padding: 0 7px;
+  border-radius: 9px; color: #E8ECF3; background: rgba(8, 11, 18, .62); cursor: pointer;
+  backdrop-filter: blur(6px); transition: background-color .15s ease, color .15s ease, opacity .2s ease;
+}
+#ysn-dub-badge .ysn-b:hover { background: rgba(8, 11, 18, .88); color: #fff; }
+#ysn-dub-badge .ysn-b:focus-visible { outline: 2px solid #7C9BFF; outline-offset: 1px; }
+#ysn-dub-badge .ysn-b.on { color: #FFD23F; }
+#ysn-dub-badge .ysn-b svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+#ysn-dub-badge .ysn-b.txt { font: 600 12.5px/1 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; }
+.ysn-hover #ysn-dub-badge:not(.no-tools) .ysn-b, #ysn-dub-badge:focus-within .ysn-b { display: inline-grid; }
+/* đèn thuyết minh: luôn hiện khi đang bật */
+#ysn-dub-badge .ysn-b-dub { display: none; grid-auto-flow: column; gap: 6px; padding: 0 10px 0 9px; color: #fff; opacity: .6; }
+#ysn-dub-badge.has-dub .ysn-b-dub, .ysn-hover #ysn-dub-badge .ysn-b-dub { display: inline-grid; }
+#ysn-dub-badge .ysn-b-dub:hover, .ysn-hover #ysn-dub-badge .ysn-b-dub, #ysn-dub-badge .ysn-b-dub.live { opacity: 1; }
+#ysn-dub-badge .ysn-b-dub::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #7d8596; transition: background .25s ease, box-shadow .25s ease; }
+#ysn-dub-badge .ysn-b-dub.dub-on::before { background: #c9cfdb; }
+#ysn-dub-badge .ysn-b-dub.live::before { background: #E5484D; box-shadow: 0 0 0 3px rgba(229, 72, 77, .28); }
+#ysn-dub-badge .ysn-b-dub.on { color: #fff; }
+@media (prefers-reduced-motion: no-preference) {
+  #ysn-dub-badge .ysn-b-dub.live::before { animation: ysn-pulse 1.6s ease-in-out infinite; }
+  @keyframes ysn-pulse { 50% { box-shadow: 0 0 0 5px rgba(229, 72, 77, .12); } }
+}
+.ytp-autohide #ysn-dub-badge .ysn-b:not(.ysn-b-dub) { display: none; }
+
+/* tay nắm kéo phụ đề */
+#ysn-overlay .ysn-line { position: relative; }
+#ysn-overlay .ysn-grip {
+  position: absolute; right: -1.35em; top: 50%; transform: translateY(-50%);
+  width: .95em; height: 1.5em; border-radius: .3em; cursor: ns-resize; pointer-events: auto; opacity: 0;
+  background: rgba(8, 11, 18, .55) radial-gradient(circle, rgba(255, 255, 255, .9) 1.1px, transparent 1.5px) center / 6px 6px;
+  transition: opacity .2s ease;
+}
+.ysn-hover #ysn-overlay .ysn-grip, #ysn-overlay .ysn-line:hover .ysn-grip { opacity: .7; }
+#ysn-overlay .ysn-grip:hover, #ysn-overlay .ysn-grip:active { opacity: 1; }
+#ysn-overlay .ysn-line:not(:last-child) .ysn-grip { display: none; }
+
+/* thông báo ngắn trên video */
+.ysn-toast {
+  position: absolute; top: 54px; left: 50%; transform: translate(-50%, -6px); z-index: 62; pointer-events: none;
+  font: 500 13px/1.3 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; color: #fff;
+  background: rgba(8, 11, 18, .82); padding: 8px 14px; border-radius: 999px; opacity: 0; transition: opacity .2s ease, transform .2s ease;
+  max-width: 80%; text-align: center;
+}
+.ysn-toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* Bảng câu (danh sách cả bài) */
+#ysn-panel {
+  all: initial; position: fixed; z-index: 2147483000; top: 72px; right: 16px; bottom: 16px; width: min(380px, calc(100vw - 32px));
+  display: flex; flex-direction: column; box-sizing: border-box; overflow: hidden;
+  background: rgba(16, 21, 31, .97); color: #E8ECF3; border: 1px solid rgba(255, 255, 255, .12); border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .45); font: 14px/1.45 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+}
+#ysn-panel.yp-in-fs { position: absolute; top: 16px; }
+#ysn-panel.yp-in-frame { top: 8px; right: 8px; bottom: 8px; width: min(320px, 48vw); font-size: 13px; }
+#ysn-panel * { box-sizing: border-box; font: inherit; color: inherit; letter-spacing: normal; text-transform: none; }
+#ysn-panel [hidden] { display: none !important; }
+#ysn-panel .yp-head { display: flex; align-items: center; gap: 8px; padding: 12px 10px 8px 16px; }
+#ysn-panel .yp-title { flex: 1; font-weight: 650; font-size: 15px; white-space: nowrap; }
+#ysn-panel .yp-count { color: #8F99AB; font-weight: 400; font-size: 13px; }
+#ysn-panel button { cursor: pointer; margin: 0; }
+#ysn-panel .yp-chip { border: 1px solid rgba(255, 255, 255, .16); background: rgba(255, 255, 255, .06); border-radius: 999px; padding: 3px 10px; font-size: 12px; }
+#ysn-panel .yp-chip[aria-pressed="true"] { border-color: rgba(255, 210, 63, .5); color: #FFD23F; }
+#ysn-panel .yp-x { border: 0; background: transparent; width: 28px; height: 28px; border-radius: 8px; color: #9AA4B6; font-size: 14px; }
+#ysn-panel .yp-x:hover { background: rgba(255, 255, 255, .1); color: #fff; }
+#ysn-panel .yp-search {
+  margin: 0 12px 8px; padding: 8px 12px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, .14);
+  background: rgba(255, 255, 255, .06); outline: none; width: auto; height: auto; color: #E8ECF3;
+}
+#ysn-panel .yp-search::placeholder { color: #7F8BA0; }
+#ysn-panel .yp-search:focus { border-color: #7C9BFF; }
+#ysn-panel .yp-list { flex: 1; min-height: 0; overflow-y: auto; padding: 2px 6px 6px; scrollbar-width: thin; overscroll-behavior: contain; }
+#ysn-panel .yp-row {
+  display: grid; grid-template-columns: 46px 1fr; column-gap: 6px; row-gap: 1px; padding: 7px 10px 7px 8px; border-radius: 10px;
+  cursor: pointer; border-left: 3px solid transparent;
+}
+#ysn-panel .yp-row:hover { background: rgba(255, 255, 255, .06); }
+#ysn-panel .yp-row.on { background: rgba(255, 210, 63, .1); border-left-color: #FFD23F; }
+#ysn-panel .yp-time { grid-row: span 2; color: #7F8BA0; font-size: 12px; font-variant-numeric: tabular-nums; padding-top: 2px; }
+#ysn-panel .yp-or { color: #E6E9EF; }
+#ysn-panel .yp-tr { color: #FFD23F; font-size: .95em; }
+#ysn-panel .yp-tr:empty { display: none; }
+#ysn-panel .yp-foot { display: flex; gap: 6px; padding: 10px 12px 12px; border-top: 1px solid rgba(255, 255, 255, .08); }
+#ysn-panel .yp-foot button {
+  flex: 1; border: 1px solid rgba(255, 255, 255, .14); background: rgba(255, 255, 255, .06); border-radius: 8px;
+  padding: 7px 4px; font-size: 12.5px; white-space: nowrap;
+}
+#ysn-panel .yp-foot button:hover { background: rgba(255, 255, 255, .12); }
+#ysn-panel .yp-foot button[aria-pressed="true"] { border-color: #FFD23F; color: #FFD23F; }
+#ysn-panel :focus-visible { outline: 2px solid #7C9BFF; outline-offset: 2px; }
+
+/* Ẩn phụ đề gốc của YouTube khi đang hiện song ngữ */
+.ysn-hide-native .ytp-caption-window-container,
+.ysn-hide-native .caption-window { display: none !important; }
+
+/* Trang khác (Coursera, Udemy, video.js, Plyr…): ẩn phụ đề gốc vẽ bằng DOM */
+.ysn-hide-native-generic .vjs-text-track-display,
+.ysn-hide-native-generic .plyr__captions,
+.ysn-hide-native-generic [data-purpose="captions-cue-text"],
+.ysn-hide-native-generic [class*="captions-display--captions-container"],
+.ysn-hide-native-generic [class*="captions-display-module--captions-container"],
+.ysn-hide-native-generic .rc-CaptionsRenderer,
+.ysn-hide-native-generic [class*="CaptionsRenderer"] { display: none !important; }
+/* Trình phát phim phổ biến (JW, ArtPlayer, Shaka, Vimeo, Netflix…): làm trong suốt — vẫn giữ chữ để chế độ trực tiếp đọc */
+.ysn-hide-native-generic .jw-captions, .ysn-hide-native-generic .jw-text-track-container,
+.ysn-hide-native-generic .art-subtitle, .ysn-hide-native-generic .shaka-text-container,
+.ysn-hide-native-generic .vp-captions, .ysn-hide-native-generic .player-timedtext,
+.ysn-hide-native-generic .mejs__captions-layer, .ysn-hide-native-generic .mejs-captions-layer,
+.ysn-hide-native-generic .dplayer-subtitle, .ysn-hide-native-generic .xgplayer-subtitle,
+.ysn-hide-native-generic .bpx-player-subtitle-wrap, .ysn-hide-native-generic .fp-captions { opacity: 0 !important; }
+
+/* chế độ trực tiếp: phụ đề trình phát tự vẽ vẫn phải còn chữ để đọc → chỉ làm trong suốt */
+.ysn-hide-native-generic .ysn-live-src { opacity: 0 !important; }
+.ysn-host { position: relative !important; }
+
+/* Bảng tra từ */
+#ysn-lookup {
+  position: absolute; z-index: 70; box-sizing: border-box; overflow-y: auto; overscroll-behavior: contain;
+  background: rgba(16, 21, 31, .96); color: #E8ECF3; border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 12px; padding: 12px 14px 12px; box-shadow: 0 12px 32px rgba(0, 0, 0, .45);
+  font: 14px/1.45 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; text-align: left;
+  scrollbar-width: thin;
+}
+#ysn-lookup * { box-sizing: border-box; }
+#ysn-lookup .lk-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+#ysn-lookup .lk-word { font-size: 20px; font-weight: 650; color: #fff; word-break: break-word; }
+#ysn-lookup .lk-ipa { color: #A8D8FF; font-size: 15px; margin-top: 1px; }
+#ysn-lookup .lk-ipa2 { color: #7F8BA0; font-size: 12.5px; }
+#ysn-lookup .lk-audio { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 4px; }
+#ysn-lookup button { font: inherit; color: inherit; cursor: pointer; }
+#ysn-lookup .lk-play { font-size: 12.5px; padding: 4px 9px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06); }
+#ysn-lookup .lk-play:hover { background: rgba(255,255,255,.14); }
+#ysn-lookup .lk-play:disabled { opacity: .5; }
+#ysn-lookup .lk-close { border: 0; background: transparent; color: #9AA4B6; font-size: 15px; width: 28px; height: 28px; border-radius: 8px; flex: none; }
+#ysn-lookup .lk-close:hover { background: rgba(255,255,255,.1); color: #fff; }
+#ysn-lookup .lk-tools { display: flex; align-items: center; gap: 4px; flex: none; }
+#ysn-lookup .lk-save { font-size: 12.5px; padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: transparent; color: #E8ECF3; }
+#ysn-lookup .lk-save:hover { background: rgba(255,255,255,.1); }
+#ysn-lookup .lk-save.on { color: #FFD23F; border-color: rgba(255,210,63,.5); }
+#ysn-lookup .lk-tr { font-size: 16px; font-weight: 600; color: #FFD23F; margin: 8px 0 4px; }
+#ysn-lookup .lk-sense { padding-top: 8px; margin-top: 8px; border-top: 1px solid rgba(255,255,255,.08); }
+#ysn-lookup .lk-pos { font-size: 12.5px; font-weight: 600; color: #9DB4FF; margin-bottom: 3px; }
+#ysn-lookup .lk-def { margin: 4px 0 6px; }
+#ysn-lookup .lk-def-vi { color: #fff; }
+#ysn-lookup .lk-def-src { color: #AEB6C5; font-size: 13px; }
+#ysn-lookup .lk-ex { color: #8F99AB; font-size: 13px; font-style: italic; margin-top: 2px; }
+#ysn-lookup .lk-syn { color: #8F99AB; font-size: 12.5px; }
+#ysn-lookup .lk-loading, #ysn-lookup .lk-err { color: #AEB6C5; padding: 6px 0; }
+#ysn-lookup .lk-src { color: #8E98AB; font-size: 12px; margin-top: 10px; }
+#ysn-lookup :focus-visible { outline: 2px solid #7C9BFF; outline-offset: 2px; }
+
+/* lời mời bật dịch trên máy (khi Google chặn) */
+.ysn-prompt {
+  position: absolute; top: 52px; left: 50%; transform: translateX(-50%); z-index: 63; display: flex; align-items: center; gap: 10px;
+  max-width: 90%; padding: 8px 8px 8px 14px; border-radius: 12px; background: rgba(16, 21, 31, .95); color: #E8ECF3;
+  font: 500 13px/1.35 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; box-shadow: 0 8px 24px rgba(0,0,0,.4);
+}
+.ysn-prompt button { all: unset; cursor: pointer; padding: 6px 12px; border-radius: 8px; background: #FFD23F; color: #111; font-weight: 650; white-space: nowrap; }
+.ysn-prompt button.x { background: transparent; color: #9AA4B6; padding: 6px 8px; }
+.ysn-prompt button:disabled { opacity: .6; cursor: default; }
+
+/* sang câu mới: hiện dần 140ms (mượt hơn nhảy chữ đột ngột) */
+@keyframes ysn-in { from { opacity: .25; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+#ysn-overlay.ysn-fresh .ysn-line { animation: ysn-in .14s ease-out; }
+@media (prefers-reduced-motion: reduce) { #ysn-overlay.ysn-fresh .ysn-line { animation: none; } }

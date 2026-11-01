@@ -1,0 +1,140 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Song Ngữ & Thuyết Minh",
+  "description": "Phụ đề song ngữ, phiên âm, tra từ và thuyết minh giọng nói cho YouTube, Coursera, Udemy và mọi trang có video.",
+  "version": "0.7.0",
+  "default_locale": "vi",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "YouTube Song Ngữ & Thuyết Minh"
+  },
+  "options_page": "options/options.html",
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "permissions": [
+    "storage",
+    "offscreen",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://127.0.0.1/*",
+        "http://localhost/*",
+        "https://www.youtube.com/*",
+        "https://*.coursera.org/*",
+        "https://*.udemy.com/*",
+        "https://*.edx.org/*",
+        "https://*.linkedin.com/learning/*",
+        "https://*.pluralsight.com/*",
+        "https://*.skillshare.com/*",
+        "https://*.ted.com/*",
+        "https://*.vimeo.com/*"
+      ],
+      "exclude_matches": [
+        "https://www.youtube.com/embed/*"
+      ],
+      "js": [
+        "edition.js",
+        "content/settings.js",
+        "content/captions.js",
+        "content/sites.js",
+        "content/subsources.js",
+        "content/translator.js",
+        "content/phonetic.js",
+        "content/overlay.js",
+        "content/voices.js",
+        "content/dubber.js",
+        "content/lookup.js",
+        "content/panel.js",
+        "content/main.js",
+        "content/export.js"
+      ],
+      "css": [
+        "content/overlay.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/embed/*",
+        "https://www.youtube-nocookie.com/embed/*"
+      ],
+      "js": [
+        "edition.js",
+        "content/settings.js",
+        "content/captions.js",
+        "content/sites.js",
+        "content/subsources.js",
+        "content/translator.js",
+        "content/phonetic.js",
+        "content/overlay.js",
+        "content/voices.js",
+        "content/dubber.js",
+        "content/lookup.js",
+        "content/panel.js",
+        "content/main.js",
+        "content/export.js"
+      ],
+      "css": [
+        "content/overlay.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://www.youtube-nocookie.com/embed/*"
+      ],
+      "js": [
+        "content/page-bridge.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/detector.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "commands": {
+    "toggle-subtitles": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "Bật/tắt phụ đề song ngữ"
+    },
+    "toggle-dub": {
+      "suggested_key": {
+        "default": "Alt+Shift+D"
+      },
+      "description": "Bật/tắt thuyết minh"
+    }
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "cross_origin_embedder_policy": {
+    "value": "require-corp"
+  },
+  "cross_origin_opener_policy": {
+    "value": "same-origin"
+  }
+}

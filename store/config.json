@@ -1,0 +1,16 @@
+{
+  "_ghi_chu": "Cấu hình bản bán. Điền sau khi tạo cửa hàng + sản phẩm trên Lemon Squeezy, rồi chạy: python3 tools/build-store.py",
+  "version": "0.6.0",
+  "name": "Song Ngữ & Thuyết Minh – phụ đề song ngữ, phiên âm, tra từ",
+  "shortName": "Song Ngữ & Thuyết Minh",
+  "description": "Phụ đề song ngữ, phiên âm, tra từ và thuyết minh giọng nói cho video YouTube, Coursera, Udemy và mọi trang có video.",
+  "lemonSqueezy": {
+    "storeId": 0,
+    "productIds": [],
+    "variants": { "monthly": 0, "yearly": 0, "lifetime": 0 },
+    "checkout": { "monthly": "", "yearly": "", "lifetime": "" }
+  },
+  "prices": { "monthly": "2$", "yearly": "20$", "lifetime": "50$" },
+  "freeMinutes": 30,
+  "support": ""
+}

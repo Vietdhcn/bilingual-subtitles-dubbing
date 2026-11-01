@@ -1,0 +1,17 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><style>
+:root { --screen: #0E131C; --amber: #FFD23F; --ivory: #E6E9EF; --plate: rgba(8, 11, 18, .66); }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 1280px; height: 800px; overflow: hidden; }
+body { background: radial-gradient(120% 90% at 18% 0%, #1F2A3D 0%, transparent 60%), radial-gradient(90% 80% at 100% 100%, #2A1E2B 0%, transparent 55%), var(--screen);
+  font-family: "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif; color: var(--ivory); -webkit-font-smoothing: antialiased; }
+.sub { display: flex; flex-direction: column; gap: 8px; }
+.sub span { display: inline-block; width: fit-content; padding: 4px 16px 6px; border-radius: 8px; background: var(--plate); line-height: 1.22; }
+.sub .en { font-weight: 450; color: var(--ivory); font-size: 21px; letter-spacing: .005em; }
+.sub .vi { font-weight: 700; color: var(--amber); font-size: 40px; letter-spacing: -.012em; text-shadow: 0 1px 2px rgba(0,0,0,.5); }
+.shot { display: block; border-radius: 14px; box-shadow: 0 24px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.07); }
+
+    .shot { position: absolute; left: 150px; top: 50%; transform: translateY(-50%); height: 740px; width: auto; }
+    .sub { position: absolute; left: 480px; right: 70px; top: 50%; transform: translateY(-50%); align-items: flex-start; padding-left: 90px; }
+    .sub .vi { font-size: 46px; }</style><body>
+<img class="shot" src="../raw/popup.png" alt="">
+<div class="sub"><span class="en">Your subtitle style, only on the tabs you choose</span><span class="vi">Chỉnh chữ theo ý bạn, bật riêng từng tab</span></div></body></html>

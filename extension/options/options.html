@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light dark">
+<title>Cài đặt nâng cao — Song ngữ & Thuyết minh</title>
+<link rel="stylesheet" href="../popup/popup.css">
+<link rel="stylesheet" href="options.css">
+</head>
+<body class="page">
+<header class="page-head">
+  <span class="mark" aria-hidden="true"><i></i><i></i></span>
+  <div>
+    <h1>Cài đặt nâng cao</h1>
+    <p class="status">Nguồn dịch, giọng đọc và dữ liệu lưu trên máy</p>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Mục lục">
+  <a href="#pro" id="tocPro" hidden>Pro</a><a href="#sites">Trang web</a><a href="#words">Sổ từ</a><a href="#translate">Dịch</a><a href="#offline" id="tocOffline">Giọng offline</a><a href="#online">Giọng online</a><a href="#storage">Bộ nhớ</a><a href="#dev" id="tocDev">Nhà phát triển</a>
+</nav>
+
+<section id="pro" class="block" hidden>
+  <h2>Song Ngữ Pro</h2>
+  <p class="lead" id="proLead">Bản miễn phí dùng đủ mọi tính năng 30 phút mỗi ngày. Pro bỏ giới hạn thời gian.</p>
+  <div id="planNow" class="plan-now" role="status"></div>
+  <div class="plans" id="plans">
+    <a class="plan" data-plan="monthly" target="_blank" rel="noopener"><b>Theo tháng</b><span class="price" data-price="monthly"></span><small>mỗi tháng · huỷ gia hạn lúc nào cũng được</small></a>
+    <a class="plan best" data-plan="yearly" target="_blank" rel="noopener"><i class="tag">Tiết kiệm nhất</i><b>Theo năm</b><span class="price" data-price="yearly"></span><small>mỗi năm · rẻ hơn 2 tháng so với trả theo tháng</small></a>
+    <a class="plan" data-plan="lifetime" target="_blank" rel="noopener"><b>Vĩnh viễn</b><span class="price" data-price="lifetime"></span><small>trả một lần, dùng mãi</small></a>
+  </div>
+  <p class="hint" id="buyNote">Thanh toán qua Lemon Squeezy (thẻ Visa/Mastercard, PayPal, Apple Pay…). Mã bản quyền được gửi về email ngay sau khi mua. Mỗi mã dùng được trên 3 máy.</p>
+  <h3 class="sub-h">Mã bản quyền</h3>
+  <div class="actions key-row">
+    <input id="licenseKey" class="search" placeholder="Dán mã trong email mua hàng" autocomplete="off" spellcheck="false" aria-label="Mã bản quyền">
+    <button id="activate" class="primary" type="button">Kích hoạt</button>
+  </div>
+  <p id="licenseMsg" class="hint" role="status"></p>
+  <div id="licenseBox" class="license-box" hidden>
+    <div id="licenseInfo"></div>
+    <div class="actions">
+      <button id="recheck" class="ghost" type="button">Kiểm tra lại</button>
+      <button id="deactivate" class="ghost danger" type="button">Huỷ kích hoạt trên máy này</button>
+      <a id="portal" class="ghost link" target="_blank" rel="noopener">Quản lý gói, lấy lại mã</a>
+    </div>
+  </div>
+  <p class="hint seller" id="seller"></p>
+</section>
+
+<section id="sites" class="block">
+  <h2>Trang web và tiện ích khi xem</h2>
+  <p class="lead">Ngoài YouTube, Coursera, Udemy, tiện ích tự nhận video trên mọi trang (phim, bài giảng, video nhúng). Trang nào có phụ đề (CC) là có song ngữ và thuyết minh.</p>
+  <label class="row check">
+    <span>Tự bật trên mọi trang có video<br><small class="hint">Tắt nếu chỉ muốn dùng ở các trang học quen thuộc; khi đó bật riêng từng trang trong popup.</small></span>
+    <input type="checkbox" id="autoAllSites" class="mini-switch">
+  </label>
+  <label class="row check">
+    <span>Thanh nút nhỏ trên video<br><small class="hint">Rê chuột vào video: bật/tắt phụ đề, phiên âm, câu trước/sau, nghe lại, tự dừng, bảng câu.</small></span>
+    <input type="checkbox" id="showToolbar" class="mini-switch">
+  </label>
+  <label class="row check">
+    <span>Phím học khi xem: A câu trước, S nghe lại, D câu sau, Q tự dừng sau mỗi câu</span>
+    <input type="checkbox" id="learningKeys" class="mini-switch">
+  </label>
+  <h3 class="sub-h">Cài đặt riêng từng trang</h3>
+  <ul id="siteList" class="sites"></ul>
+  <p id="siteEmpty" class="hint">Chưa có. Bật/tắt riêng một trang bằng công tắc ở chân popup khi đang mở trang đó.</p>
+</section>
+
+<section id="words" class="block">
+  <h2>Sổ từ</h2>
+  <p class="lead">Từ bạn lưu khi bấm vào chữ trong phụ đề (nút ☆ Lưu), kèm phiên âm, nghĩa và câu gốc để ôn lại.</p>
+  <div class="actions words-actions">
+    <input id="wordSearch" type="search" placeholder="Tìm từ…" class="search">
+    <button id="exportWords" class="ghost" type="button">Xuất CSV (Anki, Quizlet)</button>
+    <button id="clearWords" class="ghost danger" type="button">Xoá hết</button>
+    <span id="wordsMsg" class="saved" role="status"></span>
+  </div>
+  <ul id="wordList" class="words"></ul>
+  <p id="wordEmpty" class="hint">Chưa có từ nào.</p>
+</section>
+
+<form id="form" autocomplete="off">
+<section id="translate" class="block">
+  <h2>Dịch phụ đề</h2>
+  <p class="lead">Mặc định dịch ngay trên máy bằng gói dịch có sẵn của Chrome (offline, không giới hạn); chưa có gói thì dùng Google Translate. Thêm key Azure để có nguồn dự phòng, hoặc dùng Claude để dịch theo ngữ cảnh cả đoạn.</p>
+  <div class="field">
+    <label for="provider">Nguồn dịch chính</label>
+    <select id="provider">
+      <option value="auto">Tự động: dịch trên máy (nếu đã tải gói), Google, Azure</option>
+      <option value="google">Google Translate</option>
+      <option value="azure">Azure Translator (cần key)</option>
+      <option value="claude">Claude (cần key, dịch theo ngữ cảnh)</option>
+    </select>
+  </div>
+  <div class="grid2">
+    <div class="field"><label for="azureTranslatorKey">Azure Translator key</label><input id="azureTranslatorKey" type="password" placeholder="Key của Translator resource"></div>
+    <div class="field"><label for="azureTranslatorRegion">Region</label><input id="azureTranslatorRegion" placeholder="vd. southeastasia"></div>
+  </div>
+  <p class="hint">Tạo resource “Translator” gói F0 (miễn phí 2 triệu ký tự/tháng) trên portal.azure.com, mục Keys and Endpoint.</p>
+  <div class="grid2" id="claudeBox">
+    <div class="field"><label for="claudeApiKey">Claude API key</label><input id="claudeApiKey" type="password" placeholder="sk-ant-…"></div>
+    <div class="field"><label for="claudeModel">Model</label><input id="claudeModel" placeholder="claude-sonnet-5-5"></div>
+  </div>
+</section>
+
+<section id="offline" class="block">
+  <h2>Giọng offline (chạy trên máy)</h2>
+  <p class="lead">Giọng neural chạy ngay trên máy, không gửi văn bản ra ngoài. Mỗi giọng tải một lần (60–115 MB) rồi dùng mãi. Tiếng Việt có Vais (nữ) và MMS (nam).</p>
+  <ul id="piperList" class="models"></ul>
+  <p class="hint">Model Piper lấy từ kho chính thức rhasspy/piper-voices, MMS từ facebook/mms-tts (bản ONNX của Xenova) trên HuggingFace. Mỗi model có giấy phép riêng: Vais CC BY 4.0, MMS CC BY-NC 4.0 (chỉ dùng cá nhân, phi thương mại).</p>
+</section>
+
+<section id="online" class="block">
+  <h2>Giọng online</h2>
+  <p class="lead">Dịch vụ giọng đọc chính thức. Các giọng đánh dấu ★ biểu cảm giống người thật nhất (có ngữ điệu, cảm xúc theo câu). Cần key của bạn.</p>
+  <div class="field">
+    <label for="ttsProvider">Dịch vụ</label>
+    <select id="ttsProvider">
+      <option value="gcloud">★ Google Cloud — Chirp 3 HD: 30 giọng rất giống người, có tiếng Việt (có hạn mức miễn phí)</option>
+      <option value="gemini">★ Gemini TTS — 30 giọng, điều khiển cảm xúc bằng câu chữ (key Google AI Studio)</option>
+      <option value="elevenlabs">★ ElevenLabs — giọng biểu cảm nhất (gói miễn phí có hạn mức nhỏ)</option>
+      <option value="openai">★ OpenAI — 13 giọng, điều khiển cách đọc bằng chỉ dẫn (trả phí theo lượt)</option>
+      <option value="azure">Azure Speech — HoaiMy, NamMinh + giọng đa ngôn ngữ/HD (gói F0 miễn phí)</option>
+    </select>
+  </div>
+  <div class="grid2" id="azureBox">
+    <div class="field"><label for="azureKey">Azure Speech key</label><input id="azureKey" type="password" placeholder="Key 1 của Speech resource"></div>
+    <div class="field"><label for="azureRegion">Region</label><input id="azureRegion" placeholder="southeastasia"></div>
+  </div>
+  <div class="field" id="gcloudBox"><label for="gcloudKey">Google Cloud API key</label><input id="gcloudKey" type="password" placeholder="AIza… (bật Cloud Text-to-Speech API cho project)"></div>
+  <div class="grid2" id="geminiBox">
+    <div class="field"><label for="geminiKey">Gemini API key</label><input id="geminiKey" type="password" placeholder="Lấy tại aistudio.google.com/apikey"></div>
+    <div class="field"><label for="geminiTtsModel">Model</label>
+      <select id="geminiTtsModel">
+        <option value="gemini-3.8-flash-tts">Gemini 3.8 Flash TTS — biểu cảm nhất</option>
+        <option value="gemini-3.8-flash-lite-tts">Gemini 3.8 Flash-Lite TTS — nhanh, rẻ hơn</option>
+      </select></div>
+  </div>
+  <div class="field" id="openaiBox"><label for="openaiKey">OpenAI API key</label><input id="openaiKey" type="password" placeholder="sk-…"></div>
+  <div class="grid2" id="elevenBox">
+    <div class="field"><label for="elevenKey">ElevenLabs API key</label><input id="elevenKey" type="password" placeholder="Lấy tại elevenlabs.io → Developers → API keys"></div>
+    <div class="field"><label for="elevenModel">Model</label>
+      <select id="elevenModel">
+        <option value="eleven_v4_turbo">v4 Turbo — biểu cảm, phản hồi nhanh</option>
+        <option value="eleven_v4">v4 — biểu cảm nhất, chậm hơn</option>
+        <option value="eleven_v3">v3</option>
+        <option value="eleven_flash_v2_5">Flash v2.5 — nhanh, rẻ nhất</option>
+      </select></div>
+  </div>
+  <div class="field" id="styleBox"><label for="ttsStyle">Cách đọc (Gemini, OpenAI)</label>
+    <textarea id="ttsStyle" rows="2" placeholder="Giọng thuyết minh phim tự nhiên, ấm áp, truyền cảm; ngữ điệu và cảm xúc theo đúng nội dung từng câu như người thật đang kể, không đọc đều đều như máy."></textarea></div>
+  <p class="hint">Key chỉ lưu trong Chrome của bạn và gửi thẳng tới dịch vụ đã chọn. Lưu xong, mở popup → mục Giọng đọc để nghe thử và chọn giọng.</p>
+  <div class="actions"><button type="submit" class="primary">Lưu cài đặt</button><span id="msg" class="saved" role="status"></span></div>
+</section>
+</form>
+
+<section id="storage" class="block">
+  <h2>Bộ nhớ trên máy</h2>
+  <p class="lead">Bản dịch được lưu theo từng video (tối đa 150 video gần nhất) để xem lại không phải dịch lại.</p>
+  <div class="actions"><button id="clearCache" class="ghost">Xoá bản dịch đã lưu</button><span id="cacheMsg" class="saved" role="status"></span></div>
+</section>
+
+<section id="dev" class="block">
+  <h2>Nhà phát triển</h2>
+  <label class="row check">
+    <span>Cho phép công cụ test điều khiển qua trang<br><small class="hint">Chỉ bật khi đang phát triển: trang web có thể đổi cài đặt và nạp lại tiện ích.</small></span>
+    <input type="checkbox" id="devMode" class="mini-switch">
+  </label>
+  <div class="actions"><button id="reload" class="ghost">Nạp lại tiện ích</button></div>
+</section>
+
+<script src="../edition.js"></script>
+<script src="../content/settings.js"></script>
+<script src="../content/voices.js"></script>
+<script src="options.js"></script>
+</body>
+</html>

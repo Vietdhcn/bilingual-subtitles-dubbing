@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chính sách quyền riêng tư — Song Ngữ &amp; Thuyết Minh</title>
+<style>
+  :root { --ink: #172033; --muted: #5B6578; --line: #DCE1EA; --paper: #F7F8FB; --accent: #2F5BEA; color-scheme: light dark; }
+  @media (prefers-color-scheme: dark) { :root { --ink: #E7EBF2; --muted: #97A1B3; --line: #2A3345; --paper: #121722; --accent: #7C9BFF; } }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 40px 16px 80px; }
+  h1 { font-size: 26px; line-height: 1.25; margin: 0 0 6px; }
+  h2 { font-size: 18px; margin: 32px 0 8px; }
+  p, li { color: var(--ink); } .muted { color: var(--muted); font-size: 14px; }
+  ul { padding-left: 22px; } li { margin: 4px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 14.5px; margin: 8px 0; }
+  th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  a { color: var(--accent); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 44px 0; }
+</style>
+</head>
+<body>
+<main>
+<h1>Chính sách quyền riêng tư — Song Ngữ &amp; Thuyết Minh</h1>
+<p class="muted">Áp dụng cho tiện ích trình duyệt “Song Ngữ &amp; Thuyết Minh” trên Chrome Web Store. Cập nhật: 27/10/2026.</p>
+
+<p><b>Tóm tắt:</b> nhà phát triển không có máy chủ nào nhận dữ liệu của bạn, không quảng cáo, không theo dõi, không bán dữ liệu.
+Tiện ích chỉ gửi đi những gì cần cho tính năng bạn đang dùng (chữ phụ đề cần dịch hoặc đọc, mã bản quyền cần kiểm tra),
+thẳng tới dịch vụ làm việc đó.</p>
+
+<h2>1. Dữ liệu được gửi ra khỏi máy và gửi tới đâu</h2>
+<table>
+  <tr><th>Khi nào</th><th>Gửi gì</th><th>Tới đâu</th></tr>
+  <tr><td>Dịch phụ đề</td><td>Chữ phụ đề của video đang xem</td><td>Dịch trên máy bằng Translator có sẵn của Chrome (không gửi đi). Khi máy chưa có gói dịch: Google Translate. Nếu bạn tự nhập key: Microsoft Azure Translator hoặc Anthropic Claude.</td></tr>
+  <tr><td>Thuyết minh</td><td>Câu dịch cần đọc</td><td>Giọng của hệ điều hành / trình duyệt (một số giọng “Online” của trình duyệt xử lý trên máy chủ của Microsoft hoặc Google); Google Translate TTS; hoặc dịch vụ bạn tự nhập key: Azure Speech, Google Cloud Text-to-Speech, Google Gemini, OpenAI, ElevenLabs.</td></tr>
+  <tr><td>Tra từ</td><td>Từ bạn bấm vào</td><td>Free Dictionary API (dictionaryapi.dev) và dịch vụ dịch ở trên.</td></tr>
+  <tr><td>Kích hoạt / kiểm tra Pro</td><td>Mã bản quyền, mã kích hoạt của máy và tên máy dạng “Chrome · Windows · a1b2c3d4” (chuỗi ngẫu nhiên, không chứa thông tin cá nhân)</td><td>Lemon Squeezy (lemonsqueezy.com), khoảng 12 giờ một lần.</td></tr>
+  <tr><td>Lấy phụ đề</td><td>Yêu cầu tải file phụ đề của video, kèm đăng nhập sẵn có của bạn với chính trang đó (vd. Udemy)</td><td>Chính trang web đang phát video. Không gửi cho bên nào khác.</td></tr>
+</table>
+<p>Mỗi dịch vụ trên xử lý dữ liệu theo chính sách riêng của họ. Việc mua gói Pro (email, thông tin thanh toán) do Lemon Squeezy
+thực hiện theo <a href="https://www.lemonsqueezy.com/privacy">chính sách của Lemon Squeezy</a>; tiện ích không bao giờ thấy số thẻ của bạn.</p>
+
+<h2>2. Dữ liệu chỉ lưu trên máy bạn</h2>
+<ul>
+  <li>Cài đặt (ngôn ngữ, cỡ chữ, màu, giọng…), trạng thái bật/tắt của từng tab, bản dịch đã làm (tối đa 150 video gần nhất), sổ từ bạn lưu,
+    số phút đã dùng trong ngày, trạng thái gói Pro và email mua hàng do Lemon Squeezy trả về khi kích hoạt (để bạn biết mã của ai).</li>
+  <li>Cài đặt và key dịch vụ bạn nhập được đồng bộ qua tài khoản trình duyệt của bạn (chrome.storage.sync) nếu bạn bật đồng bộ trình duyệt.</li>
+  <li>Gỡ tiện ích là xoá toàn bộ dữ liệu trên. Nút “Xoá bản dịch đã lưu” và “Xoá hết” sổ từ có trong trang Cài đặt nâng cao.</li>
+</ul>
+
+<h2>3. Những gì tiện ích không làm</h2>
+<ul>
+  <li>Không đọc nội dung trang ngoài video và phụ đề của video; không thu thập lịch sử duyệt web.</li>
+  <li>Không có phân tích hành vi, quảng cáo hay mã theo dõi; không bán hoặc chia sẻ dữ liệu cho mục đích khác.</li>
+  <li>Mặc định tắt ở mọi tab. Ở tab chưa bật, tiện ích chỉ có một đoạn mã nhỏ chờ phát hiện video (và trên YouTube, ghi nhận
+    phụ đề mà trình phát tự tải để dùng khi bạn bật) — không đọc nội dung trang, không gửi gì ra ngoài cho tới khi bạn bật.</li>
+</ul>
+
+<h2>4. Liên hệ</h2>
+<p>Câu hỏi về quyền riêng tư: <span id="contact">[email hỗ trợ]</span>.</p>
+
+<hr>
+
+<h1>Privacy Policy — Song Ngữ &amp; Thuyết Minh</h1>
+<p class="muted">Applies to the “Song Ngữ &amp; Thuyết Minh” browser extension on the Chrome Web Store. Updated October 27, 2026.</p>
+<p><b>Summary:</b> the developer runs no server that receives your data. No ads, no tracking, no data sales. The extension only sends
+what a feature you are using needs (subtitle text to translate or read aloud, a license key to check), directly to the service doing that work.</p>
+<h2>1. What leaves your device</h2>
+<ul>
+  <li><b>Translation</b> — subtitle text of the video you watch: translated on-device by Chrome's built-in Translator when available; otherwise Google Translate;
+    or Microsoft Azure Translator / Anthropic Claude if you add your own key.</li>
+  <li><b>Voice-over</b> — the translated sentence: your OS/browser voices (some browser “Online” voices are processed by Microsoft or Google), Google Translate TTS,
+    or Azure Speech / Google Cloud TTS / Gemini / OpenAI / ElevenLabs if you add your own key.</li>
+  <li><b>Word lookup</b> — the word you click: Free Dictionary API (dictionaryapi.dev) and the translation service above.</li>
+  <li><b>Pro license</b> — license key, activation id and a device label such as “Chrome · Windows · a1b2c3d4” (random, not personal): Lemon Squeezy, about every 12 hours.
+    Purchases are processed by Lemon Squeezy under <a href="https://www.lemonsqueezy.com/privacy">their privacy policy</a>; the extension never sees your card.</li>
+  <li><b>Caption files</b> — requested from the website playing the video, with your existing session on that site (e.g. Udemy); not sent anywhere else.</li>
+</ul>
+<h2>2. Stored only on your device</h2>
+<p>Settings, per-tab state, cached translations (last 150 videos), saved words, today's usage minutes, Pro status and the purchase email returned by
+Lemon Squeezy. Settings and service keys you enter sync through your browser account (chrome.storage.sync) if browser sync is on. Uninstalling removes all of it.</p>
+<h2>3. What the extension does not do</h2>
+<p>It does not read page content other than the video and its captions, does not collect browsing history, has no analytics, ads or trackers,
+does not sell or share data for unrelated purposes, and and is off by default in every tab: until you turn it on, it only runs a small script that waits for a video to appear (and,
+on YouTube, notes the captions the player itself downloads) — it reads no page content and sends nothing anywhere.</p>
+<h2>4. Contact</h2>
+<p>Privacy questions: <span>[support email]</span>.</p>
+</main>
+</body>
+</html>

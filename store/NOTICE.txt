@@ -1,0 +1,29 @@
+Song Ngữ & Thuyết Minh — giấy phép và thư viện bên thứ ba
+========================================================
+
+Tiện ích này phát hành theo GNU General Public License phiên bản 3 (xem file LICENSE).
+Toàn bộ mã nguồn JavaScript/HTML/CSS nằm nguyên dạng (không nén, không làm rối) ngay trong gói tiện ích này.
+
+Thư viện đóng gói kèm:
+
+- espeak-ng (GPL-3.0-or-later) — tạo dòng phiên âm IPA. Bản biên dịch WebAssembly nằm trong
+  offscreen/vendor/piper_phonemize.{js,wasm,data}, lấy từ gói @diffusionstudio/piper-wasm 1.0.0 (MIT),
+  gồm piper-phonemize (MIT, © Michael Hansen) và espeak-ng cùng dữ liệu espeak-ng-data.
+  Mã nguồn tương ứng:
+    https://github.com/espeak-ng/espeak-ng
+    https://github.com/rhasspy/piper-phonemize
+    https://www.npmjs.com/package/@diffusionstudio/piper-wasm (v1.0.0)
+  Nếu cần bản mã nguồn đúng phiên bản đã dùng, liên hệ địa chỉ hỗ trợ ghi trong trang của tiện ích trên
+  Chrome Web Store; người bán gửi lại miễn phí trong vòng 3 năm kể từ ngày phát hành bản này.
+
+- pinyin-pro (MIT, © zh-lx) — phiên âm pinyin tiếng Trung, offscreen/vendor/pinyin-pro.min.mjs.
+  https://github.com/zh-lx/pinyin-pro
+
+Dịch vụ bên ngoài (tiện ích gọi tới khi bạn dùng tính năng tương ứng, không đóng gói nội dung của họ):
+
+- Dịch: Translator API có sẵn trong Chrome (dịch trên máy); Google Translate khi máy chưa có gói dịch;
+  Azure Translator / Claude nếu bạn tự nhập key.
+- Giọng đọc: giọng của hệ điều hành và trình duyệt (Web Speech API); Google Translate TTS;
+  Azure / Google Cloud / Gemini / OpenAI / ElevenLabs nếu bạn tự nhập key.
+- Tra từ: Free Dictionary API (dictionaryapi.dev), dữ liệu từ Wiktionary — CC BY-SA 3.0.
+- Bản quyền Pro: License API của Lemon Squeezy (lemonsqueezy.com).

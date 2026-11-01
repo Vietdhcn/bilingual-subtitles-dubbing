@@ -1,0 +1,21 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><style>
+:root { --screen: #0E131C; --amber: #FFD23F; --ivory: #E6E9EF; --plate: rgba(8, 11, 18, .66); }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 440px; height: 280px; overflow: hidden; }
+body { background: radial-gradient(120% 90% at 18% 0%, #1F2A3D 0%, transparent 60%), radial-gradient(90% 80% at 100% 100%, #2A1E2B 0%, transparent 55%), var(--screen);
+  font-family: "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif; color: var(--ivory); -webkit-font-smoothing: antialiased; }
+.sub { display: flex; flex-direction: column; gap: 8px; }
+.sub span { display: inline-block; width: fit-content; padding: 4px 16px 6px; border-radius: 8px; background: var(--plate); line-height: 1.22; }
+.sub .en { font-weight: 450; color: var(--ivory); font-size: 21px; letter-spacing: .005em; }
+.sub .vi { font-weight: 700; color: var(--amber); font-size: 40px; letter-spacing: -.012em; text-shadow: 0 1px 2px rgba(0,0,0,.5); }
+.shot { display: block; border-radius: 14px; box-shadow: 0 24px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.07); }
+
+.mark { position: absolute; left: 26px; top: 26px; width: 46px; height: 46px; border-radius: 12px; background: #06090F; display: grid; align-content: center; gap: 6px; padding: 0 10px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.08); }
+.mark i { display: block; height: 5px; border-radius: 3px; background: #C9CED8; }
+.mark i + i { background: var(--amber); width: 80%; justify-self: center; height: 6px; }
+.sub { position: absolute; left: 0; right: 0; bottom: 26px; align-items: center; text-align: center; gap: 6px; }
+.sub .en { font-size: 15px; padding: 3px 12px 4px; }
+.sub .vi { font-size: 30px; padding: 3px 14px 5px; }</style><body>
+<div class="mark"><i></i><i></i></div>
+<div class="sub"><span class="en">Bilingual subtitles and voice-over</span><span class="vi">Song Ngữ &amp; Thuyết Minh</span></div></body></html>
